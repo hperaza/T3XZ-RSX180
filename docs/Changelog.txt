@@ -29,7 +29,7 @@ Changelog
 - Create output file only during the second pass, else RSX will produce two
   versions of the file.
 
-- CG_HALT now generates a call to an "exit" library function.
+- CG_HALT now passes the argument of the 'halt' statement to the exit routine.
 
 - First successful compilation of the compiler under RSX180/280!
 
