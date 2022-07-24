@@ -6,9 +6,9 @@ T3X is a small, portable, procedural, block-structured, recursive, almost typele
 
 There are two versions of the compiler in this repository:
 
-* A [version](tsk-output/README.md) that directly generates task image (TSK) files. This is the first version of the port, and no longer maintained.
+* A [version that directly generates task image (TSK) files](tsk-output/README.md). This is the first version of the port, and no longer maintained.
 
-* A [version](rel-output/README.md) that generates relocatable files in Microsoft REL format, and is therefore more flexible: the object files can be linked to either the RSX180/280 or the CP/M version of the run-time library to produce TSK or COM files, allows linking to user-written assembly routines, and contains a number of optimizations that result in smaller code.
+* A [version that generates relocatable files in Microsoft REL format](rel-output/README.md), and is therefore more flexible: the object files can be linked to either the RSX180/280 or the CP/M version of the run-time library to produce TSK or COM files, allows linking to user-written assembly routines, and contains a number of optimizations that result in smaller code.
 
 For more information, see the README.md file in the specific directories.
 
