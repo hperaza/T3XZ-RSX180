@@ -1,0 +1,101 @@
+Changelog
+---------
+
+27/06/22
+
+- First quick port of T3X/Z V1.6 to RSX180/280. Runtime library ported, except
+  for the t_bdos and t_bdoshl functions.
+
+- Summary output only if /V is specified on the command line (thus, no longer
+  output by default, to match the "silent" behavior of RSX applications).
+
+- Prefix error messages with 'T3X -- ' as per RSX conventions.
+
+- Default to .T3X file extension.
+
+- Generate task file header:
+  * Remember top of text segment after first pass so we can initialize the
+    header fields accordingly.
+  * Use the file name as default task name.
+  * The file is created non-contiguous as the necessary library support is
+    not there yet.
+
+
+28/06/22
+
+- Close Infile and Outfile on error to avoid RSX180/280 complaining about
+  about "exit with outstanding I/O".
+
+- Create output file only during the second pass, else RSX will produce two
+  versions of the file.
+
+- CG_HALT now passes the argument of the 'halt' statement to the exit routine.
+
+- First successful compilation of the compiler under RSX180/280!
+
+- The default ("success") exit code under RSX180/280 is 1 and not 0 (0 means
+  "warning").
+
+
+01/07/22
+
+- Report code and data size, number of symbols, etc. as unsigned decimal.
+
+
+02/07/22
+
+- Working on a new version that generates REL files:
+  * added REL-output routines.
+  * use two unused SFLAGS bits for segment information.
+  * globaddr() now allocates space in data segment, and no longer in code
+    segment with a relative jump to get around the data; CG_RJUMP became
+    obsolete and was removed.
+  * gen() function expanded to handle segment information.
+  * removed emitlib() since the Run-Time library is now added at the link
+    phase.
+  * the Run-Time library is now a separate REL library, mklib no longer
+    needed.
+
+
+10/07/22
+
+- Generate external references for Run-Time library calls. Pointers to the
+  corresponding symbol table entries are now kept in a separate table to
+  make chain address handling easier (saves a symbol table lookup.)
+
+
+21/07/22
+
+- New symbol 'class' and 'object' types, taken from the PC compiler version.
+  Class members can be constants or functions at this point, not variables.
+  Due to REL name length limitations, external function names are aliased to
+  a shorter name, invisible to the compiled program (before, T.* methods were
+  entered into the symbol table as simple identifiers resolving to a fixed
+  library address)
+
+- Chain externals when calling external object methods.
+
+
+22/07/22
+
+- Emit an external call to the initialization library code, do not assume
+  that the main program begins at zero (code-relative) address.
+
+- Place constant strings, byte vectors and tables on data segment. This
+  eliminates the jump-around instruction required when those are placed in
+  the code segment, resulting in smaller code.
+
+- Module statement now sets REL module name.
+
+- First working version!
+
+- Don't add 't' object by default; create it in object_decl();
+
+
+23/07/22
+
+- Remove redundant jump-around instructions.
+
+- Added 'external' keyword to allow calling external assembly-language
+  functions.
+
