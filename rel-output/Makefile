@@ -18,4 +18,5 @@ t3x.com: t.obj
 	zxcc tkb -"t3x,tcpm,tcpm=t.obj/of:c,t3xzcpm/lb/q"
 
 clean:
-	rm -f t.com t.t3x t3x.com t3x.tsk *.rel *.obj *.lib *.sym *.map *~
+	(cd lib; make clean)
+	rm -f t.com t3x.com t3x.tsk *.rel *.obj *.lib *.sym *.map *~
